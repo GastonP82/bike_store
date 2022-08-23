@@ -2,8 +2,8 @@ const controller = {
     index : (req, res) => {
         res.render ('index')
     },
-    login : (req, res) => {
-        res.render ('login')
+    userLoginForm : (req, res) => {
+        res.render ('userLoginForm')
     },
     register : (req, res) => {
         res.render ('register')
