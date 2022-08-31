@@ -15,18 +15,21 @@
     <h1>Crear usuario</h1>
     <form action=""  method="POST" enctype="multipart/form-data">
     <div>
+        <br>
     <label for="">Nombre</label>
     <input type="text" name="firstName">
     </div>
+    <br>
     <div>
         <label for="">Apellido</label>
         <input type="text" name="lastName">
     </div>
+    <br>
     <div>
         <label for="">Email</label>
         <input type="text" name="email">
     </div>
-
+<br>
 
     <label for="roles">Roles </label>
     <select name="roles">
@@ -40,5 +43,8 @@
     <p> <button class="botonCrear" type="submit">Crear</button>
  
     </form>
+    <br>
+    <footer><%- include('./partials/footer') %>  </footer>
+
 </body>
 </html>

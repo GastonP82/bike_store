@@ -3,16 +3,16 @@ const router = express.Router();
 const path = require('path');
 
 //multer-subir archivos
-// const multer = require('multer');
-// const storage = multer.diskStorage({
-//     destination: function (req, file, cb) {
-//         cb(null, 'public/images/products');
-//     },
-//     filename: function (req, file, cb) {
-//         cb(null, file.fieldname + '-' + Date.now() + path.extname(file.originalname));
-//     }
-// });
-//   const upload = multer({ storage: storage })
+const multer = require('multer');
+const storage = multer.diskStorage({
+    destination: function (req, file, cb) {
+        cb(null,path.join(__dirname, '../../public/img/products'));
+    },
+    filename: function (req, file, cb) {
+        cb(null, Date.now() +'-'+ file.originalname);
+    }
+});
+const upload = multer({ storage: storage })
   
 // //  requerir los controllers
  const productsController = require('../controllers/productsController');
@@ -22,7 +22,7 @@ const path = require('path');
 
 // Crear los productos
 router.get('/create', productsController.create); 
-router.post('/create', productsController.store); 
+router.post('/create',upload.single('image'), productsController.store); 
 
 
 //Listado de produtos

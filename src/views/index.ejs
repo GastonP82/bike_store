@@ -3,18 +3,30 @@
 <head>
     <link rel='stylesheet' href='/css/style.css' /> 
     <%- include('./partials/head') %>  
-</head>
+</head> 
+   <%- include('./partials/navBar') %>  
+
 <body>
-    
-    <%- include('./partials/navBar') %>  
+    <br>
+    <div class="form-search-bar" action="#" method="GET">
+        <form action="/" method="POST">
+            <div class="nameField">
+                <input class="barra_busqueda" type="text" name="barra_busqueda"
+                    placeholder="Buscar bicicleta">
+                    <button>Buscar</button>
+                    <i class="fa fa-search" aria-hidden="true"></i>
+
+            </div>
+            <br>
+    </div>
     <main>
         <figure class="fondo">
-            <img src="/img/fondo.png" alt="fondo">
+            <img class="fondo" src="/img/fondo.png" alt="fondo">
           </figure>  
     </main>
-    <footer>
-        <%- include('./partials/footer') %>  
-    </footer>
+    <br>
+    <footer><%- include('./partials/footer') %>  </footer>
+
     
     
 </body>

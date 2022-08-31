@@ -19,7 +19,8 @@ const productsController = {
 	name: req.body.name,
 	description: req.body.description,
 	price: req.body.price,
-	colors_id: req.body.colors
+	colors_id: req.body.colors,
+	image: req.file.filename
 	});
 	res.redirect('/products');
 	}, 

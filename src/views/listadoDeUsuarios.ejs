@@ -7,18 +7,16 @@
     <link rel='stylesheet' href='/css/style.css' />    
     <%- include('./partials/navBar') %>  
     
-    <h1> Listado de productos</h1>
+    <h1> Listado de Usuarios</h1>
 
 <ul>
     <% for (let i=0; i < products.length; i++){ %>
     <li>
         <a href="/products/<%= products[i].id%>">
         <%=products[i].name%>
-        <div class="img"> 
         <figure class="imagen-producto">
-            <img class='img' src=<%=products[i].image%> alt="imagen del producto">
+            <img src=<%=products[i].image%> alt="imagen del producto">
         </figure>
-    </div>
     </a>
     </li>
     <%}%>

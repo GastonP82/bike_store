@@ -18,14 +18,17 @@
             <label for="">Nombre</label>
             <input type="text" name="name" value="<%= products.name %> ">
         </div>
+        <br>
         <div>
             <label for="">Descripción</label>
             <input type="text" name="description" value="<%= products.description %>">
         </div>
+        <br>
         <div>
             <label for="">Precio</label>
             <input type="text" name="price" value="<%= products.price %>">
         </div>
+        <br>
         <p>
             <input type="file" name="image">
         </p>
@@ -49,5 +52,8 @@
  
     <a  class="botonVolver" href="/products">Productos</a></p>
     </form>
+    <br>
+    <footer><%- include('./partials/footer') %>  </footer>
+
 </body>
 </html>
