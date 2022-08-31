@@ -12,55 +12,40 @@ const usersController = {
 				res.render(path.resolve(__dirname, "../views/login"),{users:users})
 			})
 	},
-    register: function(req, res){
-		db.User.findAll()
-			.then(function(users){
-				res.render(path.resolve(__dirname, "../views/register"),{users:users})
-			})
-	},
-	create: (req, res)=> {
+
+	createUser: (req, res)=> {
 		db.Role.findAll()
 			.then(function (roles) {
-				return res.render(path.resolve(__dirname, "../views/createUser"), {roles: roles})
+				return res.render(path.resolve(__dirname, "../views/createUser"), {roles})
 			})
 	},
 	//guardar usuario
-	store: async (req, res) => {
-			  try {
-				user = await db.Product.create({
-				  firstName: req.body.nombre,
-				  lastName:req.body.apellido,
-				  email:req.body.email,
-				  password: req.body.password,
-				  roles_id: req.body.roles,
-						});
-			  } catch (error) {
-				console.error(error);
-			} 
-			res.redirect('/');
-		  },
-		  
+	storeUser: async (req, res) => {
+		try {
+		const newUser= {
+		firstName: req.body.firstName,
+		lastName: req.body.lastName,
+		email: req.body.email,
+		password: req.body.password,
+		roles_id: req.body.roles,
+		}
+		await db.User.create(newUser);
+		res.redirect('/');
+		} catch (error) {
+		console.log(error)
+	}
+			}, 
+
 	// listado de usuarios 
-	listado: (req, res)=> {
-		db.Product.findAll()
+	list: (req, res)=> {
+		db.User.findAll()
 			.then(function (users) {
-				res.render(path.resolve(__dirname, "../views/listadoDeUsuariios"), {users: users})
+				res.render(path.resolve(__dirname, "../views/listadoDeUsuarios"), {users: users})
 			})
 	},
 
 
-	// Detalle de productos 
-	detail: (req, res)=> {
-		db.Product.findByPk(req.params.id, {
-				include: [{	association: "role"}]
-			})
-			.then(function (users) {
-				res.render(path.resolve(__dirname, "../views/userDetail"), {
-					users: users
-				})
-			})
-	},
-
+	
 	// Editar usuarios
 	edit: (req, res)=> {
 		let pedidoUsers = db.User.findByPk(req.params.id)
@@ -76,21 +61,25 @@ const usersController = {
 	},
 
 	// Actualizar
-	update: (req, res)=> {
-		db.User.update({
+	update: async(req, res) => {
+		try{
+		user = await db.Product.update({
 			firstName: req.body.firstName,
 			lastName: req.body.lastName,
 			email: req.body.email,
 			password: req.body.password,
-			roles_id: req.body.role
-		}, {
+			roles_id: req.body.roles
+				  }, {
 			where: {
-				id: req.params.id
+			  id: req.params.id
 			}
-		});
-		res.redirect("//" + req.params.id)
-	},
-
+		  });
+		res.redirect('/users/list');
+	
+	} catch (error){
+		console.log(error)
+	}
+	  },
 	// Borrar usuario
 	delete: (req, res)=> {
 		db.User.destroy({
@@ -98,7 +87,7 @@ const usersController = {
 					id: req.params.id
 				}
 			}),
-			res.redirect("/")
+			res.redirect("/users/list")
 	}
 };
 

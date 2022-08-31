@@ -13,7 +13,7 @@
 <body>
     <%- include('./partials/navBar') %>
     <h1>Editar producto</h1>
-    <form action="/products/edit/<%=products.id%>" method="POST"> 
+    <form action="/products/edit/<%=products.id%>" method="POST" enctype="multipart/form-data" > 
         <div>
             <label for="">Nombre</label>
             <input type="text" name="name" value="<%= products.name %> ">

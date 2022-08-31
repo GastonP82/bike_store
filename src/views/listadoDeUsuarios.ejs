@@ -10,15 +10,10 @@
     <h1> Listado de Usuarios</h1>
 
 <ul>
-    <% for (let i=0; i < products.length; i++){ %>
+    <% for (let i=0; i < users.length; i++){ %>
     <li>
-        <a href="/products/<%= products[i].id%>">
-        <%=products[i].name%>
-        <figure class="imagen-producto">
-            <img src=<%=products[i].image%> alt="imagen del producto">
-        </figure>
-    </a>
-    </li>
+        <%=users[i].roles_id%>
+     </li>
     <%}%>
 </ul>
 

@@ -14,16 +14,25 @@ const productsController = {
 	},
 	//guardar producto
 		  
-	store: (req, res) => {
-	db.Product.create({
-	name: req.body.name,
-	description: req.body.description,
-	price: req.body.price,
-	colors_id: req.body.colors,
-	image: req.file.filename
-	});
-	res.redirect('/products');
-	}, 
+	store: async (req, res) => {
+
+		let image = "/img/products/default.png";
+         if (req.file) {
+  		image = `/img/products/${req.file.filename}`;
+}
+		try {const newProduct={
+		name: req.body.name,
+		description: req.body.description,
+		price: req.body.price,
+		colors_id: req.body.colors,
+		image: image
+		}
+		await db.Product.create(newProduct);
+		res.redirect('/products');
+		} catch (error) {
+		console.log(error)
+	}
+			}, 
 
 	// listado de productos 
 	listado: (req, res)=> {
@@ -61,20 +70,29 @@ const productsController = {
 	},
 
 	// Actualizar
-	update: (req, res)=> {
-		db.Product.update({
+	update: async(req, res) => {
+		let image = "/img/products/default.png";
+		if (req.file) {
+		 image = `/img/products/${req.file.filename}`;
+}
+		try{
+		product = await db.Product.update({
 			name: req.body.name,
 			description: req.body.description,
 			price: req.body.price,
-			colors_id: req.body.color
-		}, {
+			color: req.body.color,
+			image: image
+				  }, {
 			where: {
-				id: req.params.id
+			  id: req.params.id
 			}
-		});
-		res.redirect("/products/" + req.params.id)
-	},
-
+		  })
+		res.redirect('/products')
+	
+	} catch (error){
+		console.log(error)
+	}
+	  },
 	// Borrar productos
 	delete: (req, res)=> {
 		db.Product.destroy({
