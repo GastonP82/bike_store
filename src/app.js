@@ -5,7 +5,8 @@ const methodOverride =  require('method-override');
 const mainRoutes = require("./routes/main");
 const productsRoutes = require('./routes/products');
 const usersRoutes = require('./routes/users'); 
-
+const apisproductsRoutes = require('./routes/apis/products'); 
+const apisusersRoutes = require('./routes/apis/users'); 
 const app = express();
 
 // view engine setup para usar ejs//
@@ -17,7 +18,8 @@ app.use(express.static('public'));
 app.use('/', mainRoutes);
 app.use('/products', productsRoutes);
 app.use('/users', usersRoutes);
-
+app.use('/apis/products', apisproductsRoutes);
+app.use('/apis/users', apisusersRoutes);
 
 //Levantar el servidor
 const port = process.env.PORT || 3000;
