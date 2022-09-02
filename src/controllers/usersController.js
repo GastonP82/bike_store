@@ -1,7 +1,11 @@
-const fs = require('fs');
 const path = require('path');
 const db = require('../database/models')
 
+const sequelize = db.sequelize;
+const { Op } = require("sequelize");
+const moment = require('moment');
+//Aqui tienen otra forma de llamar a cada uno de los modelos
+const Users = db.User;
 
 
 
@@ -30,7 +34,7 @@ const usersController = {
 		roles_id: req.body.roles,
 		}
 		await db.User.create(newUser);
-		res.redirect('/');
+		res.redirect('/users');
 		} catch (error) {
 		console.log(error)
 	}

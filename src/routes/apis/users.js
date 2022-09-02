@@ -4,7 +4,7 @@ const router = express.Router();
 
 
 // // apis/users
-// router.get("/", userController.listAll)
-// router.get("/:id", userController.detail)
+router.get("/", userController.list)
+router.get("/:id", userController.detail)
 
 module.exports = router;

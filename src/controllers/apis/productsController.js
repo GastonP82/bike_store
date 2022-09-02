@@ -1,21 +1,49 @@
-const { send } = require("express/lib/response");
-const db = require("../../database/models");
+const path = require('path');
+const db = require('../../database/models');
+const sequelize = db.sequelize;
+const { Op } = require("sequelize");
+const moment = require('moment');
+
+const Products = db.Product;
+const productsAPIController = {
+    'list': (req, res) => {
+        db.Product.findAll({include: { association: 'color' }}, )
+
+        .then(products => {
+            const productsData = products.map(product => (
+                 {
+                    ...product.dataValues,
+                    description: '/api/products/' + product.id
+                }
+            ))
+            let respuesta = {
+                meta: {
+                    status : 200,
+                    total: products.length,
+                    url: 'api/products'
+                    
+                },
+                data: productsData
+            }
+                res.json(respuesta);
+            })
+    },
+    'detail': (req, res) => {
+        db.Product.findByPk(req.params.id, {include: { association: 'color' }})
+            .then(product => {
+                let respuesta = {
+                    meta: {
+                        status: 200,
 
 
-module.exports={
 
-
-    listAll:(req,res)=>{
-                   db.Product.findAll ({atribute: ["id","name","description"],
-                   include: [{association: 'color'}]} )
-                .then(products => {
-                     res.status(200).json({
-                      total: products.length ,
-                      data: products
-                     })
-    })
-},
-    detail: (req,res)=>{
-
-    }
+                        total: product.length,
+                        url: '/api/products/' + product.id
+                    },
+                    data: product,
+                }
+                res.json(respuesta);
+            });
+    },
 }
+module.exports = productsAPIController;
