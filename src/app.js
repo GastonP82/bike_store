@@ -8,6 +8,7 @@ const usersRoutes = require('./routes/users');
 const apisproductsRoutes = require('./routes/apis/products'); 
 const apisusersRoutes = require('./routes/apis/users'); 
 const app = express();
+app.use(express.urlencoded({ extended: false }));
 
 // view engine setup para usar ejs//
 app.set ('views', path.resolve(__dirname,'../views'));

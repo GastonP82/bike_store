@@ -1,11 +1,6 @@
 const path = require('path');
 const db = require('../database/models')
 
-const sequelize = db.sequelize;
-const { Op } = require("sequelize");
-const moment = require('moment');
-//Aqui tienen otra forma de llamar a cada uno de los modelos
-const Users = db.User;
 
 
 
@@ -24,21 +19,21 @@ const usersController = {
 			})
 	},
 	//guardar usuario
-	storeUser: async (req, res) => {
-		try {
-		const newUser= {
+	storeUser:async (req, res) => {
+
+		try {const newUser={
 		firstName: req.body.firstName,
 		lastName: req.body.lastName,
 		email: req.body.email,
-		password: req.body.password,
+		password:req.body.password,
 		roles_id: req.body.roles,
-		}
+				}
 		await db.User.create(newUser);
-		res.redirect('/users');
+		res.redirect('/');
 		} catch (error) {
 		console.log(error)
 	}
-			}, 
+			},  
 
 	// listado de usuarios 
 	list: (req, res)=> {
@@ -67,7 +62,7 @@ const usersController = {
 	// Actualizar
 	update: async(req, res) => {
 		try{
-		user = await db.Product.update({
+		user = await db.User.update({
 			firstName: req.body.firstName,
 			lastName: req.body.lastName,
 			email: req.body.email,
