@@ -11,8 +11,11 @@
 
 <ul>
     <% for (let i=0; i < users.length; i++){ %>
+    
     <li>
-        <%=users[i].roles_id%>
+    <a href="/users/<%= users[i].id%>">
+        <%=users[i].firstName%> 
+        <%=users[i].lastName%> </a>
      </li>
     <%}%>
 </ul>

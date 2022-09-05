@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <%- include('./partials/head') %>  
+</head>
+<body>
+    
+    <%- include('./partials/navBar') %>  
+    <br>
+    <main>
+<h3>Nombre: <%= users.firstName %> </h1> 
+<h3>Apellido : <%= users.lastName %> </h3>
+<h3>Email :  <%= users.email %> </h3>
+<h3>Rol: <%= users.role.name %> </h3>
+
+<br>
+<div class="buttom"> 
+    <a  href="/users/edit/<%= users.id %> ">
+    <button>Editar</button> 
+</a>
+
+<a  href="/users/delete/<%= users.id %> ">
+    <button>Borrar</button> 
+</a>
+</div>
+
+
+         
+
+
+</main>
+    <footer>
+        <%- include('./partials/footer') %>  
+    </footer>
+    
+    
+</body>
+</html>

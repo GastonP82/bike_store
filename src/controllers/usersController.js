@@ -43,6 +43,16 @@ const usersController = {
 			})
 	},
 
+	detail: (req, res)=> {
+		db.User.findByPk(req.params.id, {
+				include: [{	association: "role"}]
+			})
+			.then(function (users) {
+				res.render(path.resolve(__dirname, "../views/userDetail"), {
+					users
+				})
+			})
+	},
 
 	
 	// Editar usuarios
