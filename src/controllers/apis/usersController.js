@@ -5,21 +5,22 @@ const { Op } = require("sequelize");
 const moment = require('moment');
 
 const Users = db.User;
+
 const usersAPIController = {
     'list': (req, res) => {
-        db.User.findAll({attributes:{exclude: ["password"]}})
+        db.User.findAll({include: ['role'], attributes:{exclude: ["password"]}})
         .then(users => {
             const usersData = users.map(user => (
                  {
                     ...user.dataValues,
-                    detail: '/api/users/' + user.id
+                    detail: '/apis/users/' + user.id
                 }
             ))
             let respuesta = {
                 meta: {
                     status : 200,
                     total: users.length,
-                    url: 'api/users'
+                    url: 'apis/users'
                 },
                 data: usersData
             }
@@ -33,12 +34,14 @@ const usersAPIController = {
                     meta: {
                         status: 200,
                         total: user.length,
-                        url: '/api/users/' + user.id
+                        url: '/apis/users/' + user.id
                     },
                     data: user,
                 }
                 res.json(respuesta);
             });
-    },
+    },   
+
 }
+
 module.exports = usersAPIController;

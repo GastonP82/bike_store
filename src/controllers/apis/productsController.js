@@ -13,17 +13,21 @@ const productsAPIController = {
             const productsData = products.map(product => (
                  {
                     ...product.dataValues,
-                    description: '/api/products/' + product.id
+                    detail: '/api/products/' + product.id,
+                    total: products.length,
+                    categoriaTotal:2
+
                 }
             ))
             let respuesta = {
                 meta: {
                     status : 200,
                     total: products.length,
-                    url: 'api/products'
-                    
+                    url: 'api/products',
+                    categoriaTotal:3
                 },
-                data: productsData
+                data:  productsData,
+                              
             }
                 res.json(respuesta);
             })
